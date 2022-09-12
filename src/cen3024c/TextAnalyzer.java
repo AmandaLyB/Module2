@@ -6,6 +6,7 @@ public class TextAnalyzer {
 		// TODO Auto-generated method stub
 
 		InputHandler.inputHandler();
+		InputHandler.wordCount();
 	}
 
 }
