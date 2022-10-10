@@ -43,7 +43,7 @@ public class GUI {
 		JScrollPane sp=new JScrollPane(jt);
 
 		p1.add(dirText);
-=
+
 		p2.add(sp);
 
 		container.add(p1);
