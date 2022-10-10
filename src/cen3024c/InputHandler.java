@@ -23,11 +23,14 @@ import java.lang.*;
 public class InputHandler {
 
 	public static Object[][] wordList = new Object[20][2];
-	// captures input from URL and stores modified text in file
+	
 	public static void inputHandler () {
 		try {
-			File story = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\story.txt");
-	        File file = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\text.txt");
+			
+			// Input file is gathered from the GUI class 
+			// and uses the directory of the chosen file to write the word count file
+			File story = GUI.file;
+	        File file = new File(story.getAbsoluteFile().getParent()+"\\"+"text.txt");
 	        PrintWriter out = new PrintWriter(new FileOutputStream(file, false));
 	        
 	        // read text returned by server
@@ -94,11 +97,11 @@ public class InputHandler {
 			}
 			
 			// sort by most frequent words
-			
 			wordCount = sortByValue(wordCount);
 			int counts = 0;
 			for(String i : wordCount.keySet()) {
 				out.println(i + " " + wordCount.get(i));
+				System.out.println(i + " " + wordCount.get(i));
 				
 				// get top 20 words for GUI
 				if (counts < 20) {
