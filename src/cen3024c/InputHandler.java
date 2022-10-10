@@ -22,48 +22,34 @@ import java.lang.*;
 
 public class InputHandler {
 
+	public static Object[][] wordList = new Object[20][2];
 	// captures input from URL and stores modified text in file
 	public static void inputHandler () {
 		try {
-	        URL url = new URL("https://www.gutenberg.org/files/1065/1065-h/1065-h.htm");
+			File story = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\story.txt");
 	        File file = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\text.txt");
 	        PrintWriter out = new PrintWriter(new FileOutputStream(file, false));
 	        
 	        // read text returned by server
-	        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+	        BufferedReader in = new BufferedReader(new FileReader(story));
 	        String line, result;
 	        while ((line = in.readLine()) != null) {
-	        	
-	        	// capture title text
-	        	if(line.contains("<h1>The Raven</h1>")) {
-	        		result = line.replaceAll("<[^>]*>", "");
-        			out.println(result);
-	        		
-        			// capture body of text
-        			while ((line = in.readLine()) != null) {
-	        			if(line.contains("<!--end chapter-->")) {
-	        				break;
-	        			}
-	        			result = line.replaceAll("<[^>]*>", " "); // remove html coding
-	        			result = result.replaceAll("&mdash", " ");
-	        			result = result.replaceAll("’", "");
-	        			result = result.replaceAll("[^A-Za-z0-9 ]", " "); // remove all non-word characters excluding space
-	        			result = result.replaceAll("\\s{2,}", " "); 
 
-	        			// print modified text from URL into file
-	        			out.println(result);
-	        		}
-	        	}
+	        	result = line.replaceAll("[^A-Za-z0-9 ]", " "); // remove all non-word characters excluding space
+	        	result = result.replaceAll("&mdash", " ");
+	        	result = result.replaceAll("\\s{2,}", " "); 
+
+	        	out.println(result);
 	        }
 	        in.close();
 	        out.close();
 	    }
-	    catch (MalformedURLException e) {
-	        System.out.println("Malformed URL: " + e.getMessage());
-	    }
-	    catch (IOException e) {
+		catch (FileNotFoundException e) {
+			e.printStackTrace();		
+		}
+		catch (IOException e) {
 	        System.out.println("I/O Error: " + e.getMessage());
-	    }   
+	    }
 	}
 
 	// reads and sorts text from file and returns frequency of words
@@ -100,18 +86,28 @@ public class InputHandler {
 			Iterator<Entry<String, Integer>> it = wordCount.entrySet().iterator();
 			while (it.hasNext()) {
 			    Entry<String, Integer> e = it.next();
-			    //String key = e.getKey();
+			    String key = e.getKey();
 			    Integer value = e.getValue();
-			    if (value == 51) {
+			    if (value == 29) {
 			        it.remove();
 			    }
 			}
 			
 			// sort by most frequent words
+			
 			wordCount = sortByValue(wordCount);
+			int counts = 0;
 			for(String i : wordCount.keySet()) {
 				out.println(i + " " + wordCount.get(i));
+				
+				// get top 20 words for GUI
+				if (counts < 20) {
+					wordList[counts][0] = i;
+					wordList[counts][1] = wordCount.get(i);
+					counts++;
+				}
 			}
+
 			in.close();
 			out.close();
 		} catch (FileNotFoundException e) {
