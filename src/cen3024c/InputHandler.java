@@ -38,7 +38,7 @@ public class InputHandler {
 	        String line, result;
 	        while ((line = in.readLine()) != null) {
 
-	        	result = line.replaceAll("[^A-Za-z0-9 ]", " "); // remove all non-word characters excluding space
+	        	result = line.replaceAll("[^A-Za-z ]", " "); // remove all non-word characters excluding space
 	        	result = result.replaceAll("&mdash", " ");
 	        	result = result.replaceAll("\\s{2,}", " "); 
 
@@ -62,11 +62,11 @@ public class InputHandler {
 		
 		try {
 			
-			File count = new File(GUI.file.getAbsoluteFile().getParent()+"\\count.txt");
+			File count = new File(GUI.file.getAbsoluteFile().getParent()+"\\" + "count.txt");
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			PrintWriter out = new PrintWriter(new FileOutputStream(count, false));
 			String line;
-			HashMap<String,Integer> wordCount = new HashMap<String,Integer>();
+			HashMap<String,Integer> wordCount = new LinkedHashMap<String,Integer>();
 			String[] lineSplit;
 			
 			// converts text to lower case, splits words by space
