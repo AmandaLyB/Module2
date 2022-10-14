@@ -58,11 +58,11 @@ public class InputHandler {
 	// reads and sorts text from file and returns frequency of words
 	public static void wordCount() {
 		
-		File file = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\text.txt");
+		File file = new File(GUI.file.getAbsoluteFile().getParent()+"\\"+"text.txt");
 		
 		try {
 			
-			File count = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\count.txt");
+			File count = new File(GUI.file.getAbsoluteFile().getParent()+"\\count.txt");
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			PrintWriter out = new PrintWriter(new FileOutputStream(count, false));
 			String line;
@@ -89,7 +89,7 @@ public class InputHandler {
 			Iterator<Entry<String, Integer>> it = wordCount.entrySet().iterator();
 			while (it.hasNext()) {
 			    Entry<String, Integer> e = it.next();
-			    String key = e.getKey();
+			    //String key = e.getKey();
 			    Integer value = e.getValue();
 			    if (value == 29) {
 			        it.remove();
