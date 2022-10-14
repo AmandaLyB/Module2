@@ -40,5 +40,4 @@ public class WordCountTest {
 			
 		assertEquals(outputList,correctList);
 	}
-
 }
