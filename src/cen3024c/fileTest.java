@@ -10,14 +10,17 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import org.junit.Test;
 
+/** This tests the GUI.java file selector
+ * and determines if the correct values are being generated.
+ */
+
 public class fileTest {
 
 	@Test
 	public void test() {
 		
 		InputHandler test = new InputHandler();
-		
-		// set GUI.file location to test file for InputHandler.inputHandler
+
 		GUI.file = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\storyTest.txt");
 		File testCount = new File("D:\\Valencia\\CEN 3024C SoftDev 1\\testCount.txt");
 		InputHandler.inputHandler();

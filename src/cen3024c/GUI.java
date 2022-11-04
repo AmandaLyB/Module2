@@ -19,8 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+/** 
+ * The GUI class handles file selection and displays the top 20 words returned by InputHandler
+ */
 public class GUI {
-	
+		
 	public static File file;
 	public static void constructGUI() {
 		

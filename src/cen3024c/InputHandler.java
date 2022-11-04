@@ -18,7 +18,9 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.lang.*;
 
-
+/**
+ * InputHandler analyzes text selected in GUI.java to determine the top 20 words used in the file.
+ */
 
 public class InputHandler {
 
@@ -120,7 +122,12 @@ public class InputHandler {
 		}	
 	}
 	
-	// sorts HashMap of word-frequency pairs in order of most to least frequent and returns new sorted HashMap
+	/**
+	 * sortByValue sorts the word count read from wordCount().
+	 *
+	 * @param hm Takes hashmap generated from file that is read in wordCount.   
+	 * @return Returns the sorted word and count data in file 
+	 */
 	public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm)
     {
         // Create a list from elements of HashMap

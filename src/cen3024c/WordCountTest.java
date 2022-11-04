@@ -10,6 +10,14 @@ import java.util.Map;
 
 import org.junit.Test;
 
+/**
+ * WordCountTest determines whether the InputHandler.sortByValue() function
+ * is sorting properly via a testable linked hashmap that is compared
+ * with the corrected linked hashmap. 
+ * 
+ * @param testMap This will be passed into sortByValue().
+ * @param correctMap This is what sortByValue() should return.
+ */
 public class WordCountTest {
 
 	@Test
