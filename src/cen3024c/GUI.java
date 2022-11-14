@@ -42,10 +42,15 @@ public class GUI {
 		JPanel p2 = new JPanel();
 		p2.setLayout(layout2);
 		
+
 		// Displays top 20 words in a table
 		String column[] = {"Word","Count"};
 		JTable jt = new JTable(InputHandler.wordList,column);
-		JScrollPane sp=new JScrollPane(jt);
+		
+		
+		JScrollPane sp = new JScrollPane(jt);
+		
+		
 		
 		// Input file chooser
 		JButton selectButton = new JButton("Choose File");
@@ -67,6 +72,7 @@ public class GUI {
 	            }
 	         }
 		});
+		
 		
 		JLabel dirText = new JLabel("Input Directory of Story File:");
 		JLabel topWords = new JLabel ("Top 20 Words");

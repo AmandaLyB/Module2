@@ -1,5 +1,6 @@
 package cen3024c;
 
+import java.sql.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -100,19 +101,42 @@ public class InputHandler {
 			
 			// sort by most frequent words
 			wordCount = sortByValue(wordCount);
-			int counts = 0;
+
+			// connect to sql database
+			Connection connection;
+			try {
+				ResultSet results = null;
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wordoccurences", "root", "cop2805");
+				Statement stmt = connection.createStatement();
+			
+			// write to count.txt and database
 			for(String i : wordCount.keySet()) {
 				out.println(i + " " + wordCount.get(i));
-				System.out.println(i + " " + wordCount.get(i));
-				
-				// get top 20 words for GUI
-				if (counts < 20) {
-					wordList[counts][0] = i;
-					wordList[counts][1] = wordCount.get(i);
-					counts++;
-				}
+				String stmtInsert = "INSERT INTO words (word, frequency) VALUES ('" + i + "','" +  wordCount.get(i) + "')";
+				stmt.execute(stmtInsert);
+				//System.out.println(i + " " + wordCount.get(i));
 			}
-
+				String strSelect = "SELECT * FROM words";
+				ResultSet result = stmt.executeQuery(strSelect);
+				int counts = 0;
+				
+				// read from database to generate top 20 words for GUI
+				while (result.next()) {
+					System.out.println(result.getInt("id") + ": " + result.getInt("frequency") + " " + result.getString("word"));
+					if (counts < 20) {
+						wordList[counts][0] = result.getString("word");
+						wordList[counts][1] = result.getInt("frequency");
+						counts++;
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			in.close();
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -151,4 +175,7 @@ public class InputHandler {
         }
         return temp;
     }
+	
+	
+	
 }
