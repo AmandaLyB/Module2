@@ -88,7 +88,6 @@ public class InputHandler {
 				}
 			}
 			
-			// remove empty key
 			Iterator<Entry<String, Integer>> it = wordCount.entrySet().iterator();
 			while (it.hasNext()) {
 			    Entry<String, Integer> e = it.next();
